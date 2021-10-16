@@ -18,12 +18,12 @@ const userController = {
         }
     },
     login: async (req, res)=>{
-        const {email} = req.body;
+        const {email, password} = req.body;
         try {
-            const user = await User.findOne({email})
+            const user = await User.findOne({email}) //Procura o email que está sendo digitado no body lá no DB. Como é o mesmo nome, então pode colocar somente '{email}', senão colocaria, por ex: '{email: req.body.email}'
             if(!user){
                 res.status(400).send("Email incorrect");
-            } else if(!await bcrypt.compare(req.body.password, user.password)){
+            } else if(!await bcrypt.compare(password, user.password)){
                 res.status(400).send("Password incorrect");
             } else{
                 res.send(user);
