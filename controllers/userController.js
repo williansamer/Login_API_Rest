@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userController = {
     register: async (req, res)=>{
@@ -18,7 +19,7 @@ const userController = {
         }
     },
     login: async (req, res)=>{
-        const {email, password} = req.body;
+        const {id, email, password, admin} = req.body;
         try {
             const user = await User.findOne({email}) //Procura o email que está sendo digitado no body lá no DB. Como é o mesmo nome, então pode colocar somente '{email}', senão colocaria, por ex: '{email: req.body.email}'
             if(!user){
@@ -26,6 +27,10 @@ const userController = {
             } else if(!await bcrypt.compare(password, user.password)){
                 res.status(400).send("Password incorrect");
             } else{
+                const token = jwt.sign({id: user._id, admin: user.admin}, process.env.TOKEN_SECRET); //Definir exatamente como objeto(com chave e valor), para que ao ser verificado, ele mostre os campos(neste caso o 'id' e 'admin') para ser manipulados a frente(neste caso, no 'adminRouter')
+
+                user.password = undefined;
+                res.header("authorization", token); //Definido o Header 'authorization' que é o token, ou seja, enviando para o header o token
                 res.send(user);
             }
         } 

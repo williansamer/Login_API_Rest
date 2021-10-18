@@ -1,7 +1,7 @@
 //TOKEN é uma chave criada pelo 'JWT' para validar o acesso ao usuário em cada aplicação feita pelo FRONT.
 //O TOKEN é formado em duas partes..
 //               O 'PAYLOAD', ou seja, credenciais únicas de cada documento(geralmente é o 'ID')
-//               Um 'SECRET', ou seja, um segredo que somente o BAKEND sabe. Pode ser uma chave totalmente aleatória que é armazenada nas variáveis de ambiente(pasta config, por ex).
+//               Um 'SECRET', ou seja, um segredo que somente o BAKEND sabe. Pode ser uma chave totalmente aleatória que é armazenada nas variáveis de ambiente(pasta config de arquivo json, por ex).
 //OBS: Antes de todo TOKEN, vem a palavra "Bearer" seguido de um espaço.
 
 //https:jwt.io
