@@ -14,7 +14,6 @@ mongoose.connect(process.env.MONGO_URL,  (error)=>{
 mongoose.Promise = global.Promise;
 
 app.use("/user", express.json(), userRouter);
-
 app.use("/admin", express.json(), adminRouter);
 
 app.listen(process.env.PORT, ()=>{

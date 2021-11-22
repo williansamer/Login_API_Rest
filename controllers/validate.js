@@ -6,6 +6,7 @@ validate = {
             name: Joi.string().required().min(3). max(50), //modo de tratamento feito no Joi
             email: Joi.string().required().min(3). max(100).lowercase(),
             password: Joi.string().required().min(3). max(50),
+            admin: Joi.boolean().default(false)
         })
         return schema.validate(data); //Retornando a validação do schema dos dados(data)
     },
